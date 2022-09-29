@@ -15,7 +15,7 @@ int maxValue = 12;
 int[,] array = GetArray(rows, columns, minValue, maxValue);
 PrintArray(array);
 Console.WriteLine();
-//RowsSwitch();
+RowsSwitch(array);
 PrintArray(array);
 
 int[,] GetArray(int rows, int columns, int minValue, int maxValue)
@@ -43,7 +43,16 @@ void PrintArray(int[,] result)
     }
 }
 
-void RowsSwitch(int[,] result)
+int[,] RowsSwitch(int[,] result)
 {
-    
+    int rows = result.GetLength(0);
+    int columns = result.GetLength(1);
+    int[] rowsTemp = new int[columns];
+    for (int i = 0; i < columns; i++)
+    {
+        rowsTemp[i] = result[0, i];
+        result[0, i] = result[rows-1, i];
+        result[rows-1, i] = rowsTemp[i];
+    }
+    return result;
 }
